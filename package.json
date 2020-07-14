@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "t:build": "babel ./src --out-dir dist --extensions .ts,.tsx",
+    "m:run": "typeorm migration:run",
+    "m:revert": "typeorm migration:revert"
   },
   "dependencies": {
     "@babel/cli": "^7.10.4",
