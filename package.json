@@ -3,10 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "concurrently \"next dev\" \"babel -w ./src --out-dir dist --extensions .ts,.tsx\"",
     "build": "next build",
     "start": "next start",
-    "t:build": "babel ./src --out-dir dist --extensions .ts,.tsx",
     "m:run": "typeorm migration:run",
     "m:revert": "typeorm migration:revert"
   },
@@ -33,6 +32,7 @@
     "@types/react": "^16.9.42",
     "@types/react-dom": "^16.9.8",
     "babel-plugin-styled-components": "^1.10.7",
+    "concurrently": "^5.2.0",
     "file-loader": "^6.0.0"
   }
 }

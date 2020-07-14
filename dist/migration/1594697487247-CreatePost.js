@@ -49,6 +49,9 @@ var CreatePost1594697487247 = /*#__PURE__*/function () {
                 }));
 
               case 2:
+                return _context.abrupt("return", _context.sent);
+
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -74,6 +77,9 @@ var CreatePost1594697487247 = /*#__PURE__*/function () {
                 return queryRunner.dropTable('posts');
 
               case 2:
+                return _context2.abrupt("return", _context2.sent);
+
+              case 3:
               case "end":
                 return _context2.stop();
             }
