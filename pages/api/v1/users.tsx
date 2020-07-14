@@ -6,6 +6,7 @@ import md5 from 'md5';
 
 const Users:NextApiHandler = async (req, res) => {
   const {username, password, passwordConfirmation} = req.body;
+  const connection = await getDatabaseConnection();
   const errors = {
     username: [] as string[], password: [] as string[], passwordConfirmation: [] as string[]
   };
@@ -21,6 +22,10 @@ const Users:NextApiHandler = async (req, res) => {
   if (username.trim().length <= 3) {
     errors.username.push('太短');
   }
+  const found = connection.manager.find(User, {username});
+  if (found) {
+    errors.username.push('用户名已存在，不能重复注册');
+  }
   if (password === '') {
     errors.password.push('不能为空');
   }
@@ -33,7 +38,6 @@ const Users:NextApiHandler = async (req, res) => {
     res.statusCode = 422;
     res.write(JSON.stringify(errors));
   } else {
-    const connection = await getDatabaseConnection();
     const user = new User();
     user.username = username;
     user.passwordDigest = md5(password);
