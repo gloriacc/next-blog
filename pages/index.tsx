@@ -1,20 +1,19 @@
 import React from "react";
 import {GetServerSideProps, NextPage} from 'next';
 import {getDatabaseConnection} from '../lib/getDatabaseConnection';
+import {Post} from '../src/entity/Post';
+import Link from 'next/link';
 
 type Props = {
-  browser: {
-    name: string;
-    version: string;
-    major: string;
-  }
+  posts: Post[]
 }
 
 const index: NextPage<Props> = (props) => {
-  const {browser} = props;
+  const {posts} = props;
   return (
     <div>
-      <h1>{browser.name}</h1>
+      <h1>文章列表</h1>
+      {posts.map(post => <Link key={post.id} href={`/posts/${post.id}`}><a>{post.title}</a></Link>)}
     </div>
   )
 }
@@ -22,13 +21,12 @@ const index: NextPage<Props> = (props) => {
 export default index;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const connect = await getDatabaseConnection();
-  console.log('connect');
+  const connection = await getDatabaseConnection();
+  const posts = await connection.manager.find(Post);
+  console.log(posts);
   return {
     props: {
-      browser: {
-        name: 'chrome'
-      }
+      posts: JSON.parse(JSON.stringify(posts))
     }
   };
 
