@@ -8,7 +8,8 @@
     "start": "next start",
     "m:create": "typeorm migration:create",
     "m:run": "typeorm migration:run",
-    "m:revert": "typeorm migration:revert"
+    "m:revert": "typeorm migration:revert",
+    "e:create": "typeorm entity:create"
   },
   "dependencies": {
     "@babel/cli": "^7.10.4",
