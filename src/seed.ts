@@ -7,7 +7,7 @@ import {Comment} from './entity/Comment';
 createConnection().then(async connection => {
   const {manager} = connection;
   const u1 = new User();
-  u1.username = 'gloria';
+  u1.username = 'gloria11';
   u1.passwordDigest = '123456';
   await manager.save(u1);
   const p1 = new Post();

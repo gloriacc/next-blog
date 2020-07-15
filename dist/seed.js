@@ -25,7 +25,7 @@ var _Comment = require("./entity/Comment");
           case 0:
             manager = connection.manager;
             u1 = new _User.User();
-            u1.username = 'gloria';
+            u1.username = 'gloria11';
             u1.passwordDigest = '123456';
             _context.next = 6;
             return manager.save(u1);

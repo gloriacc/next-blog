@@ -3,17 +3,16 @@ import React, {useCallback, useState} from 'react';
 import axios, {AxiosResponse} from 'axios';
 import {withSession} from '../lib/session';
 import {User} from '../src/entity/User';
+import Form from '../components/Form';
 
 const SignIn: NextPage<{user: User}> = (props) => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
-    passwordConfirmation: ''
   })
   const [errors, setErrors] = useState({
     username: [],
     password: [],
-    passwordConfirmation: []
   })
 
   const onSubmit = useCallback(e => {
@@ -29,6 +28,12 @@ const SignIn: NextPage<{user: User}> = (props) => {
       }
     });
   }, [formData]);
+
+  const onChange = useCallback((key, value) => {
+    setFormData({
+      ...formData, [key]:value
+    })
+  }, [formData]);
   return (
     <>
       {props.user &&
@@ -37,27 +42,14 @@ const SignIn: NextPage<{user: User}> = (props) => {
       </div>
       }
       <h1>登录</h1>
-      <form onSubmit={onSubmit}>
-        <div>
-          <label>用户名
-            <input type="text" value={formData.username} onChange={e => setFormData({
-              ...formData, username: e.target.value
-            })}/>
-          </label>
-          {errors.username?.length > 0 && <div>{errors.username.join(',')}</div>}
-        </div>
-        <div>
-          <label>密码
-            <input type="password" value={formData.password} onChange={e => setFormData({
-              ...formData, password: e.target.value
-            })}/>
-          </label>
-          {errors.password?.length > 0 && <div>{errors.password.join(',')}</div>}
-        </div>
-        <div>
-          <button type="submit">登录</button>
-        </div>
-      </form>
+      <Form
+        fields={[
+          {label: '用户名', type: 'text', value: formData.username, onChange: e => onChange('username', e.target.value), errors: errors.username},
+          {label: '密码', type: 'password', value: formData.password, onChange: e => onChange('password', e.target.value), errors: errors.password}
+        ]}
+        onSubmit={onSubmit}
+        buttons={<button type="submit">登录</button>}
+      />
     </>
   )
 };
