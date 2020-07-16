@@ -1,4 +1,6 @@
 import React, {ReactChild, useCallback, useState} from 'react';
+import axios, {AxiosResponse} from 'axios';
+import {Simulate} from 'react-dom/test-utils';
 
 type Field<T> = {
   label: string;
@@ -10,11 +12,14 @@ type UseFormOptions<T> = {
   initFormData:T;
   fields: Field<T>[];
   buttons: ReactChild;
-  onSubmit: (fd: T) => void;
+  submit: {
+    request: (fd: T) => Promise<AxiosResponse<T>>;
+    message: string;
+  }
 }
 
 export function useForm<T>(options: UseFormOptions<T>) {
-  const {initFormData, fields, buttons, onSubmit} = options;
+  const {initFormData, fields, buttons, submit} = options;
   const [formData, setFormData] = useState(initFormData);
   const [errors, setErrors] = useState(() => {
     const e: { [k in keyof T]?: string[] } = {};
@@ -28,12 +33,21 @@ export function useForm<T>(options: UseFormOptions<T>) {
   const onChange = useCallback((key: keyof T, value: any) => {
     setFormData({...formData, [key]: value});
   }, [formData]);
-  const _onSubmit = useCallback(e => {
+  const onSubmit = useCallback(e => {
     e.preventDefault();
-    onSubmit(formData);
-  }, [onSubmit, formData]);
+    submit.request(formData).then(() => {
+      alert(submit.message);
+    },(error) => {
+      if (error.response) {
+        const response: AxiosResponse = error.response;
+        if (response.status === 422) {
+          setErrors(response.data);
+        }
+      }
+    });
+  }, [submit, formData]);
   const form = (
-    <form onSubmit={_onSubmit}>
+    <form onSubmit={onSubmit}>
       {fields.map(field =>
         <div>
           <label>{field.label}
@@ -50,6 +64,6 @@ export function useForm<T>(options: UseFormOptions<T>) {
     </form>
   );
   return {
-    form: form, setErrors: setErrors
+    form: form
   };
 }
