@@ -1,6 +1,5 @@
 import React, {ReactChild, useCallback, useState} from 'react';
-import axios, {AxiosResponse} from 'axios';
-import {Simulate} from 'react-dom/test-utils';
+import {AxiosResponse} from 'axios';
 
 type Field<T> = {
   label: string;
@@ -14,7 +13,7 @@ type UseFormOptions<T> = {
   buttons: ReactChild;
   submit: {
     request: (fd: T) => Promise<AxiosResponse<T>>;
-    message: string;
+    success: () => void;
   }
 }
 
@@ -35,9 +34,9 @@ export function useForm<T>(options: UseFormOptions<T>) {
   }, [formData]);
   const onSubmit = useCallback(e => {
     e.preventDefault();
-    submit.request(formData).then(() => {
-      alert(submit.message);
-    },(error) => {
+    submit.request(formData).then(
+      submit.success,
+      (error) => {
       if (error.response) {
         const response: AxiosResponse = error.response;
         if (response.status === 422) {
