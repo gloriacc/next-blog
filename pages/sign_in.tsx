@@ -1,22 +1,13 @@
 import {GetServerSideProps, GetServerSidePropsContext, NextPage} from 'next';
-import React, {useCallback, useState} from 'react';
+import React from 'react';
 import axios, {AxiosResponse} from 'axios';
 import {withSession} from '../lib/session';
 import {User} from '../src/entity/User';
-import Form from '../components/Form';
+import {useForm} from '../hooks/useForm';
 
 const SignIn: NextPage<{user: User}> = (props) => {
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-  })
-  const [errors, setErrors] = useState({
-    username: [],
-    password: [],
-  })
-
-  const onSubmit = useCallback(e => {
-    e.preventDefault();
+  const initFormData = {username: '', password: ''};
+  const onSubmit = (formData: typeof initFormData) => {
     axios.post('/api/v1/sessions', formData).then(()=>{
       alert('登录成功');
     },(error) => {
@@ -27,30 +18,22 @@ const SignIn: NextPage<{user: User}> = (props) => {
         }
       }
     });
-  }, [formData]);
-
-  const onChange = useCallback((key, value) => {
-    setFormData({
-      ...formData, [key]:value
-    })
-  }, [formData]);
+  };
+  const {form, setErrors} = useForm({
+    initFormData,
+    fields: [
+      {label: '用户名', type: 'text', key: 'username'},
+      {label: '密码', type: 'password', key: 'password'}
+    ],
+    buttons: <button type="submit">登录</button>,
+    onSubmit
+  });
   return (
-    <>
-      {props.user &&
-      <div>
-        当前登录用户为 {props.user.username}
-      </div>
-      }
+    <div>
+      {props.user && <div>当前登录用户为 {props.user.username}</div>}
       <h1>登录</h1>
-      <Form
-        fields={[
-          {label: '用户名', type: 'text', value: formData.username, onChange: e => onChange('username', e.target.value), errors: errors.username},
-          {label: '密码', type: 'password', value: formData.password, onChange: e => onChange('password', e.target.value), errors: errors.password}
-        ]}
-        onSubmit={onSubmit}
-        buttons={<button type="submit">登录</button>}
-      />
-    </>
+      {form}
+    </div>
   )
 };
 
