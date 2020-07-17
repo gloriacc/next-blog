@@ -7,6 +7,7 @@ import {withSession} from '../../lib/session';
 import {User} from '../../src/entity/User';
 import styled from 'styled-components';
 import axios from 'axios';
+import {isPrivate} from '@babel/types';
 
 type Props = {
   posts: Post[],
@@ -76,9 +77,10 @@ export default PostsIndex;
 
 export const getServerSideProps: GetServerSideProps = withSession(async (context:GetServerSidePropsContext) => {
   const connection = await getDatabaseConnection();
-  const posts = await connection.manager.find(Post);
   // @ts-ignore
   const user = context.req.session.get('currentUser');
+  const filter = (!user || user.username !== 'admin') && { isPrivate: false };
+  const posts = await connection.manager.find(Post, filter);
   return {
     props: {
       posts: JSON.parse(JSON.stringify(posts)),
