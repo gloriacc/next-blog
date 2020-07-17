@@ -43,15 +43,21 @@ const Wrapper = styled.main`
 const PostsIndex: NextPage<Props> = (props) => {
   const {posts, user} = props;
   const onDelete = useCallback((id: number)=>{
-    console.log(id);
     axios.delete(`/api/v1/postDelete`, {params: {id}}).then(()=>{
       alert('删除成功');
       location.href = '/posts';
     },error => {
       console.log(error);
     })
-  }, [posts]);
-  const onVisibleToggle = useCallback((id: number)=>{},[]);
+  }, []);
+  const onVisibleToggle = useCallback((id: number)=>{
+    axios.put(`/api/v1/postPrivate`, {id}).then(()=>{
+      alert('切换成功');
+      location.href = '/posts';
+    },error => {
+      console.log(error);
+    })
+  },[]);
   return (
     <Wrapper>
       <section>

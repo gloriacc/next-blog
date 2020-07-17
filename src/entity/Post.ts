@@ -27,4 +27,6 @@ export class Post {
   comments: Comment[];
   @DeleteDateColumn()
   deletedAt: Date;
+  @Column('boolean')
+  isPrivate: boolean
 }
