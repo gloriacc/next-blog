@@ -11,7 +11,7 @@ const SignUp: NextPage = () => {
       {label: '密码', type: 'password', key: 'password'},
       {label: '确认密码', type: 'password', key: 'passwordConfirmation'}
     ],
-    buttons: <button type="submit">注册</button>,
+    buttons: <button type="submit">SIGN UP</button>,
     submit: {
       request: formData => axios.post('/api/v1/users', formData),
       success: () => {
@@ -22,7 +22,6 @@ const SignUp: NextPage = () => {
   });
   return (
     <div>
-      <h1>注册</h1>
       {form}
     </div>
   )

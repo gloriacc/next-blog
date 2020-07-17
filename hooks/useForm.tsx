@@ -1,5 +1,50 @@
 import React, {ReactChild, useCallback, useState} from 'react';
 import {AxiosResponse} from 'axios';
+import styled from 'styled-components';
+
+const FormWrapper = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 48px;
+  > div {
+    margin: 12px 16px;
+    width: 500px;
+    > label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      > span {
+        width: 14%;
+      }
+      > input,textarea {
+        flex-grow: 1;
+        margin-left: 20px;
+        padding: 6px 8px;
+        border: 1px solid gray;
+        outline: none;
+      }
+      > input {
+        height: 30px;
+      }
+      > textarea {
+        height: 300px;
+        resize: none;
+      }
+    }
+    > button {
+      width: 100%;
+      border: 1px solid gray;
+      padding: 12px 0;
+      margin: 12px 0 0;
+      background: none;
+      outline: none;
+      font-size: 18px;
+      line-height: 18px;
+    }
+  }
+`;
 
 type Field<T> = {
   label: string;
@@ -46,10 +91,10 @@ export function useForm<T>(options: UseFormOptions<T>) {
     });
   }, [submit, formData]);
   const form = (
-    <form onSubmit={onSubmit}>
+    <FormWrapper onSubmit={onSubmit}>
       {fields.map(field =>
         <div key={field.key.toString()}>
-          <label>{field.label}
+          <label><span>{field.label}</span>
             {field.type === 'textarea' ?
               <textarea onChange={e => onChange(field.key, e.target.value)} value={formData[field.key].toString()}/>
               :
@@ -60,7 +105,7 @@ export function useForm<T>(options: UseFormOptions<T>) {
         </div>
       )}
       <div>{buttons}</div>
-    </form>
+    </FormWrapper>
   );
   return {
     form: form

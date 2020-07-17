@@ -1,7 +1,8 @@
-import {NextPage} from 'next';
+import {GetServerSideProps, GetServerSidePropsContext, NextPage} from 'next';
 import React from 'react';
 import axios from 'axios';
 import {useForm} from '../../hooks/useForm';
+import {withSession} from '../../lib/session';
 
 const PostsNew: NextPage = () => {
   const {form,} = useForm({
@@ -10,7 +11,7 @@ const PostsNew: NextPage = () => {
       {label: '标题', type: 'text', key: 'title'},
       {label: '内容', type: 'textarea', key: 'content'}
     ],
-    buttons: <button type="submit">提交</button>,
+    buttons: <button type="submit">DONE</button>,
     submit: {
       request: formData => axios.post('/api/v1/posts', formData),
       success: () => {
@@ -27,3 +28,13 @@ const PostsNew: NextPage = () => {
 };
 
 export default PostsNew;
+
+export const getServerSideProps: GetServerSideProps = withSession(async (context:GetServerSidePropsContext) => {
+  // @ts-ignore
+  const user = context.req.session.get('currentUser');
+  return {
+    props: {
+      user: JSON.parse(JSON.stringify(user || ''))
+    }
+  };
+});
