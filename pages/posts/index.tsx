@@ -7,7 +7,6 @@ import {withSession} from '../../lib/session';
 import {User} from '../../src/entity/User';
 import styled from 'styled-components';
 import axios from 'axios';
-import {isPrivate} from '@babel/types';
 
 type Props = {
   posts: Post[],
@@ -20,6 +19,15 @@ const Wrapper = styled.main`
   align-items: center;
   padding: 24px 48px;
   > section {
+    > button {
+      width: 500px;
+      border: 1px solid gray;
+      padding: 12px 0;
+      margin: 12px 0 0;
+      background: none;
+      outline: none;
+      font-size: 18px;
+    }
     > div {
     margin: 12px 0;
       display: flex;
@@ -43,6 +51,9 @@ const Wrapper = styled.main`
 
 const PostsIndex: NextPage<Props> = (props) => {
   const {posts, user} = props;
+  const onAdd = useCallback(()=>{
+    location.href = '/posts/new';
+  },[]);
   const onDelete = useCallback((id: number)=>{
     axios.delete(`/api/v1/postDelete`, {params: {id}}).then(()=>{
       alert('删除成功');
@@ -61,6 +72,9 @@ const PostsIndex: NextPage<Props> = (props) => {
   },[]);
   return (
     <Wrapper>
+      {user.username === 'admin' && <section>
+        <button onClick={onAdd}>ADD</button>
+      </section>}
       <section>
         {posts.map(post => {
           return <div key={post.id}>
