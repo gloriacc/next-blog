@@ -4,6 +4,8 @@ import {getDatabaseConnection} from '../../../lib/getDatabaseConnection';
 import {withSession} from '../../../lib/session';
 
 const Posts:NextApiHandler =  withSession(async (req, res) => {
+  console.log(req);
+  console.log(res);
   if (req.method === 'POST') {
     const {title, content} = req.body;
     const post = new Post();

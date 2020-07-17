@@ -49,10 +49,10 @@ export class User {
     if (this.username.trim().length <= 3) {
       this.errors.username.push('太短');
     }
-    const found = await (await getDatabaseConnection()).manager.find(User, {username: this.username});
-    if (found.length > 0) {
-      this.errors.username.push('用户名已存在，不能重复注册');
-    }
+    // const found = await (await getDatabaseConnection()).manager.find(User, {username: this.username});
+    // if (found.length > 0) {
+    //   this.errors.username.push('用户名已存在，不能重复注册');
+    // }
     if (this.password === '') {
       this.errors.password.push('不能为空');
     }

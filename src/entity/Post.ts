@@ -1,6 +1,6 @@
 import {
   Column,
-  CreateDateColumn,
+  CreateDateColumn, DeleteDateColumn,
   Entity,
   ManyToOne, OneToMany,
   PrimaryGeneratedColumn,
@@ -25,4 +25,6 @@ export class Post {
   author: User;
   @OneToMany('Comment', 'post')
   comments: Comment[];
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

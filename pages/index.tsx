@@ -45,8 +45,6 @@ const HomeList = styled.section`
     outline: none;
     font-size: 18px;
   }
-   
-  
 `;
 
 const Home: NextPage<Props> = (props) => {
