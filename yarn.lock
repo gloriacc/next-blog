@@ -1129,6 +1129,11 @@
   resolved "https://r.cnpmjs.org/@types/color-name/download/@types/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
   integrity sha1-HBJhu+qhCoBVu8XYq4S3sq/IRqA=
 
+"@types/highlight.js@^9.12.4":
+  version "9.12.4"
+  resolved "https://r.cnpmjs.org/@types/highlight.js/download/@types/highlight.js-9.12.4.tgz#8c3496bd1b50cc04aeefd691140aa571d4dbfa34"
+  integrity sha1-jDSWvRtQzASu79aRFAqlcdTb+jQ=
+
 "@types/hoist-non-react-statics@*":
   version "3.3.1"
   resolved "https://r.cnpmjs.org/@types/hoist-non-react-statics/download/@types/hoist-non-react-statics-3.3.1.tgz#1124aafe5118cb591977aeb1ceaaed1070eb039f"
@@ -1146,6 +1151,11 @@
   version "4.14.157"
   resolved "https://r.cnpmjs.org/@types/lodash/download/@types/lodash-4.14.157.tgz#fdac1c52448861dfde1a2e1515dbc46e54926dc8"
   integrity sha1-/awcUkSIYd/eGi4VFdvEblSSbcg=
+
+"@types/marked@^1.1.0":
+  version "1.1.0"
+  resolved "https://r.cnpmjs.org/@types/marked/download/@types/marked-1.1.0.tgz#53509b5f127e0c05c19176fcf1d743a41e00ff19"
+  integrity sha1-U1CbXxJ+DAXBkXb88ddDpB4A/xk=
 
 "@types/md5@^2.2.0":
   version "2.2.0"
@@ -1658,6 +1668,13 @@ bindings@^1.5.0:
   integrity sha1-EDU8npRTNLwFEabZCzj7x8nFBN8=
   dependencies:
     file-uri-to-path "1.0.0"
+
+bl@~0.4.1:
+  version "0.4.2"
+  resolved "https://r.cnpmjs.org/bl/download/bl-0.4.2.tgz#5db31d72f038c54e68adc39578125fe3b0addc96"
+  integrity sha1-XbMdcvA4xU5orcOVeBJf47Ct3JY=
+  dependencies:
+    readable-stream "~1.0.2"
 
 bluebird@^3.5.5:
   version "3.7.2"
@@ -3263,6 +3280,11 @@ hex-color-regex@^1.1.0:
   resolved "https://r.cnpmjs.org/hex-color-regex/download/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
   integrity sha1-TAb8y0YC/iYCs8k9+C1+fb8aio4=
 
+highlight.js@^10.1.1:
+  version "10.1.1"
+  resolved "https://r.cnpmjs.org/highlight.js/download/highlight.js-10.1.1.tgz#691a2148a8d922bf12e52a294566a0d993b94c57"
+  integrity sha1-aRohSKjZIr8S5SopRWag2ZO5TFc=
+
 highlight.js@^9.6.0:
   version "9.18.1"
   resolved "https://r.cnpmjs.org/highlight.js/download/highlight.js-9.18.1.tgz#ed21aa001fe6252bb10a3d76d47573c6539fe13c"
@@ -3615,6 +3637,11 @@ is-wsl@^1.1.0:
   resolved "https://r.cnpmjs.org/is-wsl/download/is-wsl-1.1.0.tgz#1f16e4aa22b04d1336b66188a66af3c600c3a66d"
   integrity sha1-HxbkqiKwTRM2tmGIpmrzxgDDpm0=
 
+isarray@0.0.1:
+  version "0.0.1"
+  resolved "https://r.cnpmjs.org/isarray/download/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
+  integrity sha1-ihis/Kmo9Bd+Cav8YDiTmwXR7t8=
+
 isarray@1.0.0, isarray@^1.0.0, isarray@~1.0.0:
   version "1.0.0"
   resolved "https://r.cnpmjs.org/isarray/download/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
@@ -3843,6 +3870,11 @@ map-visit@^1.0.0:
   integrity sha1-7Nyo8TFE5mDxtb1B8S80edmN+48=
   dependencies:
     object-visit "^1.0.0"
+
+marked@^1.1.1:
+  version "1.1.1"
+  resolved "https://r.cnpmjs.org/marked/download/marked-1.1.1.tgz#e5d61b69842210d5df57b05856e0c91572703e6a"
+  integrity sha1-5dYbaYQiENXfV7BYVuDJFXJwPmo=
 
 md5.js@^1.3.4:
   version "1.3.5"
@@ -4283,6 +4315,11 @@ object-keys@^1.0.11, object-keys@^1.0.12, object-keys@^1.1.1:
   version "1.1.1"
   resolved "https://r.cnpmjs.org/object-keys/download/object-keys-1.1.1.tgz#1c47f272df277f3b1daf061677d9c82e2322c60e"
   integrity sha1-HEfyct8nfzsdrwYWd9nILiMixg4=
+
+object-keys@~0.4.0:
+  version "0.4.0"
+  resolved "https://r.cnpmjs.org/object-keys/download/object-keys-0.4.0.tgz#28a6aae7428dd2c3a92f3d95f21335dd204e0336"
+  integrity sha1-KKaq50KN0sOpLz2V8hM13SBOAzY=
 
 object-path@0.11.4:
   version "0.11.4"
@@ -5061,6 +5098,14 @@ punycode@^2.1.0:
   resolved "https://r.cnpmjs.org/punycode/download/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha1-tYsBCsQMIsVldhbI0sLALHv0eew=
 
+pygmentize-bundled@^2.3.0:
+  version "2.3.0"
+  resolved "https://r.cnpmjs.org/pygmentize-bundled/download/pygmentize-bundled-2.3.0.tgz#d425deda8d136975b933ede363135f623350814a"
+  integrity sha1-1CXe2o0TaXW5M+3jYxNfYjNQgUo=
+  dependencies:
+    bl "~0.4.1"
+    through2 "~0.2.1"
+
 q@^1.1.2:
   version "1.5.1"
   resolved "https://r.cnpmjs.org/q/download/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
@@ -5167,6 +5212,26 @@ readable-stream@^3.6.0:
     inherits "^2.0.3"
     string_decoder "^1.1.1"
     util-deprecate "^1.0.1"
+
+readable-stream@~1.0.2:
+  version "1.0.34"
+  resolved "https://r.cnpmjs.org/readable-stream/download/readable-stream-1.0.34.tgz#125820e34bc842d2f2aaafafe4c2916ee32c157c"
+  integrity sha1-Elgg40vIQtLyqq+v5MKRbuMsFXw=
+  dependencies:
+    core-util-is "~1.0.0"
+    inherits "~2.0.1"
+    isarray "0.0.1"
+    string_decoder "~0.10.x"
+
+readable-stream@~1.1.9:
+  version "1.1.14"
+  resolved "https://r.cnpmjs.org/readable-stream/download/readable-stream-1.1.14.tgz#7cf4c54ef648e3813084c636dd2079e166c081d9"
+  integrity sha1-fPTFTvZI44EwhMY23SB54WbAgdk=
+  dependencies:
+    core-util-is "~1.0.0"
+    inherits "~2.0.1"
+    isarray "0.0.1"
+    string_decoder "~0.10.x"
 
 readdirp@^2.2.1:
   version "2.2.1"
@@ -5802,6 +5867,11 @@ string_decoder@^1.0.0, string_decoder@^1.1.1:
   dependencies:
     safe-buffer "~5.2.0"
 
+string_decoder@~0.10.x:
+  version "0.10.31"
+  resolved "https://r.cnpmjs.org/string_decoder/download/string_decoder-0.10.31.tgz#62e203bc41766c6c28c9fc84301dab1c5310fa94"
+  integrity sha1-YuIDvEF2bGwoyfyEMB2rHFMQ+pQ=
+
 string_decoder@~1.1.1:
   version "1.1.1"
   resolved "https://r.cnpmjs.org/string_decoder/download/string_decoder-1.1.1.tgz#9cf1611ba62685d7030ae9e4ba34149c3af03fc8"
@@ -5996,6 +6066,14 @@ through2@^2.0.0:
   dependencies:
     readable-stream "~2.3.6"
     xtend "~4.0.1"
+
+through2@~0.2.1:
+  version "0.2.3"
+  resolved "https://r.cnpmjs.org/through2/download/through2-0.2.3.tgz#eb3284da4ea311b6cc8ace3653748a52abf25a3f"
+  integrity sha1-6zKE2k6jEbbMis42U3SKUqvyWj8=
+  dependencies:
+    readable-stream "~1.1.9"
+    xtend "~2.1.1"
 
 through@2:
   version "2.3.8"
@@ -6429,6 +6507,13 @@ xtend@^4.0.0, xtend@~4.0.1:
   version "4.0.2"
   resolved "https://r.cnpmjs.org/xtend/download/xtend-4.0.2.tgz#bb72779f5fa465186b1f438f674fa347fdb5db54"
   integrity sha1-u3J3n1+kZRhrH0OPZ0+jR/2121Q=
+
+xtend@~2.1.1:
+  version "2.1.2"
+  resolved "https://r.cnpmjs.org/xtend/download/xtend-2.1.2.tgz#6efecc2a4dad8e6962c4901b337ce7ba87b5d28b"
+  integrity sha1-bv7MKk2tjmlixJAbM3znuoe10os=
+  dependencies:
+    object-keys "~0.4.0"
 
 y18n@^4.0.0:
   version "4.0.0"

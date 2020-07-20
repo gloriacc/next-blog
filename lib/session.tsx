@@ -1,5 +1,5 @@
-import {GetServerSideProps, NextApiHandler} from 'next';
-import {withIronSession} from 'next-iron-session';
+import {GetServerSideProps, NextApiHandler, NextPage} from 'next';
+import {Handler, withIronSession} from 'next-iron-session';
 
 export function withSession(handler: NextApiHandler | GetServerSideProps) {
   return withIronSession(handler, {
