@@ -8,6 +8,9 @@ import {User} from '../src/entity/User';
 import styled from 'styled-components';
 // @ts-ignore
 import logo from '../assets/images/logo.png';
+import Icon from '../components/Icon';
+import '../assets/icons/sign.svg';
+import classNames from 'classnames';
 
 type Props = {
   posts: Post[],
@@ -38,7 +41,31 @@ const HomeTitle = styled.section`
   }
 `;
 
+const Sign = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  .sign {
+    opacity: 0;
+    width: 40px;
+    height: 40px;
+    &:hover {
+      opacity: 0.5;
+    } 
+  }
+  .sign-signIn {
+    fill: #FFFFD2;
+  }
+  .sign-signOut {
+    fill: #FCBAD3;
+  }
+`;
+
 const Home: NextPage<Props> = (props) => {
+  const {user} = props;
+  const onClick = () => {
+    location.href = user ? '/sign_out' : 'sign_in';
+  }
   return (
     <>
       <HomeTitle className='big'>
@@ -46,6 +73,9 @@ const Home: NextPage<Props> = (props) => {
         <p>Gloria 的个人博客</p>
         <Link href={'/posts'}><a>{`文章列表->`}</a></Link>
       </HomeTitle>
+      <Sign>
+        <Icon className={classNames('sign', user?'sign-signOut':'sign-signIn')} name="sign" onClick={onClick}/>
+      </Sign>
     </>
   )
 }
