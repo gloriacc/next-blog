@@ -42,16 +42,13 @@ const HomeTitle = styled.section`
 `;
 
 const Sign = styled.div`
-  position: absolute;
-  top: 10px;
-  right: 10px;
   .sign {
+    position: absolute;
+    top: 10px;
+    right: 10px;
     opacity: 0;
     width: 40px;
     height: 40px;
-    &:hover {
-      opacity: 0.5;
-    } 
   }
   .sign-signIn {
     fill: #FFFFD2;
