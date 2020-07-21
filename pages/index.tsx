@@ -6,60 +6,47 @@ import Link from 'next/link';
 import {withSession} from '../lib/session';
 import {User} from '../src/entity/User';
 import styled from 'styled-components';
+// @ts-ignore
+import logo from '../assets/images/logo.png';
 
 type Props = {
   posts: Post[],
   user: User
 }
 
-const Wrapper = styled.main`
-  display: flex;
-  flex-direction: column;
-`;
-
 const HomeTitle = styled.section`
-  height: 280px;
-  line-height: 280px;
-  font-size: 88px;
-  text-align: center;
-  border-bottom: 1px solid gray;
-`;
-
-const HomeList = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 24px 48px;
+  justify-content: center;
+  height: 100%;
+  > img {
+   width: 500px;
+  }
+  > p {
+    font-size: 28px;
+    color: #FFFFD2;
+  }
   > a {
-    width: 500px;
-    height: 200px;
-    border: 1px solid gray;
-    margin: 12px 16px;
-  } 
-  > button {
-    width: 500px;
-    border: 1px solid gray;
-    padding: 12px 0;
-    margin: 12px 0 0;
-    background: none;
-    outline: none;
-    font-size: 18px;
+    color: #FCBAD3;
+    text-decoration: none;
+  }
+  @media screen and (max-width:650px){
+   > img {
+     width: 70%;
+    }
   }
 `;
 
 const Home: NextPage<Props> = (props) => {
-  const {posts} = props;
-  const onClick = useCallback(() => {
-    location.href = '/posts';
-  },[]);
   return (
-    <Wrapper>
-      <HomeTitle className='big'>Gloria</HomeTitle>
-      <HomeList>
-        {posts.map(post => <Link key={post.id} href={`/posts/${post.id}`}><a>{post.title}{post.createdAt}</a></Link>)}
-        <button onClick={onClick}>More</button>
-      </HomeList>
-    </Wrapper>
+    <>
+      <HomeTitle className='big'>
+        <img src={logo} alt="logo"/>
+        <p>Gloria 的个人博客</p>
+        <Link href={'/posts'}><a>{`文章列表->`}</a></Link>
+      </HomeTitle>
+    </>
   )
 }
 

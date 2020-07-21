@@ -17,6 +17,9 @@ const Nav = styled.nav`
     }
   }
 `;
+const Wrapper = styled.div`
+  height: 100vh;
+`;
 
 type Props = {
   pageProps: any
@@ -24,16 +27,16 @@ type Props = {
 
 const Layout:React.FC<Props> = (props) => {
   return (
-    <div>
-      <Nav>
-        <Link href={'/'}><a>Home</a></Link>
-        <Link href={'/posts'}><a>Blogs</a></Link>
-        <a href='https://github.com/gloriacc' target='_blank'>Github</a>
-        {props.pageProps.user ? <><a>{props.pageProps.user.username}</a><Link href={'/sign_out'}><a>Sign Out</a></Link></>
-          :<><Link href={'/sign_in'}><a>Sign In</a></Link><Link href={'/sign_up'}><a>Sign Up</a></Link></>}
-      </Nav>
+    <Wrapper>
+      {/*<Nav>*/}
+      {/*  <Link href={'/'}><a>Home</a></Link>*/}
+      {/*  <Link href={'/posts'}><a>Blogs</a></Link>*/}
+      {/*  <a href='https://github.com/gloriacc' target='_blank'>Github</a>*/}
+      {/*  {props.pageProps.user ? <><a>{props.pageProps.user.username}</a><Link href={'/sign_out'}><a>Sign Out</a></Link></>*/}
+      {/*    :<><Link href={'/sign_in'}><a>Sign In</a></Link><Link href={'/sign_up'}><a>Sign Up</a></Link></>}*/}
+      {/*</Nav>*/}
       {props.children}
-    </div>
+    </Wrapper>
   )
 }
 export default Layout;
