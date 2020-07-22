@@ -10,10 +10,13 @@ import styled from 'styled-components';
 import Layout from '../../components/Layout';
 import dayjs from 'dayjs';
 import Link from 'next/link';
+import {getManager} from 'typeorm';
 
 type Props = {
   post: Post,
-  user: User
+  user: User,
+  prePost: Post,
+  nextPost: Post,
 };
 
 const Wrapper = styled.main`
@@ -31,8 +34,12 @@ const Wrapper = styled.main`
     color: #FCBAD3;
     display: flex;
     justify-content: space-between;
+    text-align: center;
     > a {
       color: #FCBAD3;
+    }
+    > span {
+      margin: 0 auto;
     }
   }
   
@@ -70,13 +77,17 @@ marked.setOptions({
 });
 
 const postsShow: NextPage<Props> = (props) => {
-  const {post} = props;
+  const {post, prePost, nextPost} = props;
 
   return (
     <Layout>
       <Wrapper>
         <h1>{post.title}</h1>
-        <div><Link href={'/posts'}><a>上一篇</a></Link>{dayjs(post.updatedAt).format('YYYY.MM.DD')}<Link href={'/posts'}><a>下一篇</a></Link></div>
+        <div>
+          {!post.isPrivate && <Link href={prePost ? `/posts/${prePost.id}` : '/posts'}><a>上一篇</a></Link>}
+          <span>{dayjs(post.updatedAt).format('YYYY.MM.DD')}</span>
+          {!post.isPrivate && <Link href={nextPost ? `/posts/${nextPost.id}` : '/posts'}><a>下一篇</a></Link>}
+        </div>
         <article dangerouslySetInnerHTML={{__html: marked(post.content)}}>
 
         </article>
@@ -92,10 +103,29 @@ export const getServerSideProps: GetServerSideProps = withSession(async (context
   const post = await connection.manager.findOne(Post, context.params.id);
   // @ts-ignore
   const user = context.req.session.get('currentUser');
+
+  const prePost = await getManager()
+    .createQueryBuilder(Post, "post")
+    .where('post.isPrivate = :isPrivate', {isPrivate: false})
+    .andWhere('post.updatedAt > :updatedAt', {updatedAt: post.updatedAt})
+    .orderBy('post.updatedAt', 'DESC')
+    .take(1)
+    .getOne();
+  const nextPost = await getManager()
+    .createQueryBuilder(Post, "post")
+    .where('post.isPrivate = :isPrivate', {isPrivate: false})
+    .andWhere('post.updatedAt < :updatedAt', {updatedAt: post.updatedAt})
+    .orderBy('post.updatedAt', 'DESC')
+    .skip(1)
+    .take(1)
+    .getOne();
+
   return {
     props: {
       post: JSON.parse(JSON.stringify(post)),
-      user: JSON.parse(JSON.stringify(user || ''))
+      user: JSON.parse(JSON.stringify(user || '')),
+      prePost: JSON.parse(JSON.stringify(prePost || '')),
+      nextPost: JSON.parse(JSON.stringify(nextPost || ''))
     }
   };
 });

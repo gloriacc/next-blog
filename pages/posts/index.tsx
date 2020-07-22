@@ -15,6 +15,8 @@ import '../../assets/icons/delete.svg';
 import '../../assets/icons/hide.svg';
 import '../../assets/icons/show.svg';
 import Layout from '../../components/Layout';
+import {createQueryBuilder, getManager} from 'typeorm';
+import 'reflect-metadata';
 
 type Props = {
   posts: Post[],
@@ -139,11 +141,15 @@ const PostsIndex: NextPage<Props> = (props) => {
 export default PostsIndex;
 
 export const getServerSideProps: GetServerSideProps = withSession(async (context:GetServerSidePropsContext) => {
-  const connection = await getDatabaseConnection();
+  await getDatabaseConnection();
   // @ts-ignore
   const user = context.req.session.get('currentUser');
-  const filter = (!user || user.username !== 'admin') && { isPrivate: false };
-  const posts = await connection.manager.find(Post, filter);
+  // const filter = (!user || user.username !== 'admin') && { isPrivate: false };
+  // const posts = await connection.manager.find(Post, filter);
+  const posts = (!user || user.username !== 'admin') ?
+    await getManager().createQueryBuilder(Post, "post").where('post.isPrivate = :isPrivate', {isPrivate: false}).orderBy('post.updatedAt', 'DESC').getMany()
+    :
+    await getManager().createQueryBuilder(Post, "post").orderBy('post.updatedAt', 'DESC').getMany()
   return {
     props: {
       posts: JSON.parse(JSON.stringify(posts)),

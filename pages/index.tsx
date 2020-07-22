@@ -84,13 +84,10 @@ const Home: NextPage<Props> = (props) => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = withSession(async (context:GetServerSidePropsContext) => {
-  const connection = await getDatabaseConnection();
-  const posts = await connection.manager.find(Post);
   // @ts-ignore
   const user = context.req.session.get('currentUser');
   return {
     props: {
-      posts: JSON.parse(JSON.stringify(posts.slice(0, 4))),
       user: JSON.parse(JSON.stringify(user || ''))
     }
   };
