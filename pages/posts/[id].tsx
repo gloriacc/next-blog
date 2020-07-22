@@ -22,6 +22,7 @@ const Wrapper = styled.main`
   justify-content: center;
   align-items: center;
   max-width: 90%;
+  min-width: 300px;
   > h1 {
     color: #FFFFD2;
   }
