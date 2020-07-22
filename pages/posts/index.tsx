@@ -7,6 +7,16 @@ import {withSession} from '../../lib/session';
 import {User} from '../../src/entity/User';
 import styled from 'styled-components';
 import axios from 'axios';
+// @ts-ignore
+import logo from '../../assets/images/logo.png';
+// @ts-ignore
+import dayjs from 'dayjs';
+import Icon from '../../components/Icon';
+import '../../assets/icons/add.svg';
+import '../../assets/icons/edit.svg';
+import '../../assets/icons/delete.svg';
+import '../../assets/icons/hide.svg';
+import '../../assets/icons/show.svg';
 
 type Props = {
   posts: Post[],
@@ -18,31 +28,77 @@ const Wrapper = styled.main`
   flex-direction: column;
   align-items: center;
   padding: 24px 48px;
+  > img {
+    width: 200px;
+  }
+  > .add {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    fill: #FFFFD2;
+  }
   > section {
-    > button {
-      width: 500px;
-      border: 1px solid gray;
-      padding: 12px 0;
-      margin: 12px 0 0;
-      background: none;
-      outline: none;
-      font-size: 18px;
-    }
-    > div {
+    max-width: 100%;
     margin: 12px 0;
+    > div {
+      padding: 12px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      > a {
+      border-bottom: 1px solid #FCBAD3;
+      a {
+        color: #FFFFD2;
+        text-decoration: none;
+        cursor: pointer;
+        :hover {
+          color: #FCBAD3;
+        }
+      }
+      > a, > div {
         display: flex;
         justify-content: space-between;
-        color: black;
-        text-decoration: none;
-        :hover {
-          color: gray;
+        align-items: center;
+        > a {
+          margin-left: 20px;
+          :first-child {
+            margin-left: 0;
+          }
         }
-        :first-child {
-          flex-grow: 1;
+        .icon {
+          width: 20px;
+          height: 20px;
+          fill: #FFFFD2;
+          vertical-align: bottom;
+          :hover {
+            fill: #FCBAD3;
+          }
+        }
+      }
+      > a {
+        flex-grow: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: inline-block;
+        max-width: 70%;
+      }
+      > span {
+        color: #FFFFD2;
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+    }
+  }
+  @media screen and (max-width:650px){
+    > section {
+      > div {
+        flex-direction: column;
+        line-height: 28px;
+        > a {
+          white-space: normal;
+          text-align: center;
         }
       }
     }
@@ -72,17 +128,17 @@ const PostsIndex: NextPage<Props> = (props) => {
   },[]);
   return (
     <Wrapper>
-      {user.username === 'admin' && <section>
-        <button onClick={onAdd}>ADD</button>
-      </section>}
+      <img src={logo} alt="logo"/>
       <section>
         {posts.map(post => {
           return <div key={post.id}>
-            <Link href={`/posts/${post.id}`}><a><span>{post.title}</span><span>{post.createdAt}</span></a></Link>
-            {user.username === 'admin' && <><Link href={`/posts/new/${post.id}`}><a>编辑</a></Link><a onClick={()=>onDelete(post.id)}>删除</a><a onClick={()=>onVisibleToggle(post.id)}>隐藏</a></>}
+            <Link href={`/posts/${post.id}`}><a>{post.title}</a></Link>
+            <span>{dayjs(post.createdAt).format('YYYY.MM.DD')}</span>
+            {user.username === 'admin' && <div><Link href={`/posts/new/${post.id}`}><a><Icon name="edit"/></a></Link><a onClick={()=>onDelete(post.id)}><Icon className="delete" name="delete"/></a><a onClick={()=>onVisibleToggle(post.id)}><Icon name={post.isPrivate ? 'hide' : 'show'}/></a></div>}
           </div>})
         }
       </section>
+      {user.username === 'admin' && <Icon className="add" name="add" onClick={onAdd}/>}
     </Wrapper>
   )
 }

@@ -2616,6 +2616,11 @@ date-fns@^2.0.1:
   resolved "https://r.cnpmjs.org/date-fns/download/date-fns-2.14.0.tgz#359a87a265bb34ef2e38f93ecf63ac453f9bc7ba"
   integrity sha1-NZqHomW7NO8uOPk+z2OsRT+bx7o=
 
+dayjs@^1.8.29:
+  version "1.8.29"
+  resolved "https://r.cnpmjs.org/dayjs/download/dayjs-1.8.29.tgz#5d23e341de6bfbd206c01136d2fb0f01877820f5"
+  integrity sha1-XSPjQd5r+9IGwBE20vsPAYd4IPU=
+
 debug@=3.1.0:
   version "3.1.0"
   resolved "https://r.cnpmjs.org/debug/download/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
