@@ -7,41 +7,40 @@ const FormWrapper = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 24px 48px;
+  // padding: 24px 48px;
+  width: 80%;
   > div {
     margin: 12px 16px;
-    width: 500px;
+    width: 100%;
     > label {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      > span {
-        width: 14%;
-      }
       > input,textarea {
-        flex-grow: 1;
-        margin-left: 20px;
+        width: 100%;
+        box-sizing: border-box;
         padding: 6px 8px;
-        border: 1px solid gray;
+        border: none;
         outline: none;
+        font-size: 16px;
       }
       > input {
-        height: 30px;
+        height: 50px;
       }
       > textarea {
-        height: 300px;
+        height: 600px;
         resize: none;
       }
     }
     > button {
       width: 100%;
-      border: 1px solid gray;
-      padding: 12px 0;
+      box-sizing: border-box;
+      border: none;
+      padding: 12px 8px;
       margin: 12px 0 0;
-      background: none;
+      background: #FCBAD3;
+      color: #FFFFD2;
       outline: none;
       font-size: 18px;
       line-height: 18px;
+      border-radius: 10px;
     }
   }
 `;
@@ -94,11 +93,12 @@ export function useForm<T>(options: UseFormOptions<T>) {
     <FormWrapper onSubmit={onSubmit}>
       {fields.map(field =>
         <div key={field.key.toString()}>
-          <label><span>{field.label}</span>
+          <label>
+            {/*<span>{field.label}</span>*/}
             {field.type === 'textarea' ?
-              <textarea onChange={e => onChange(field.key, e.target.value)} value={formData[field.key].toString()}/>
+              <textarea onChange={e => onChange(field.key, e.target.value)} value={formData[field.key].toString()} placeholder={field.label}/>
               :
-              <input type={field.type} value={formData[field.key].toString()} onChange={e => onChange(field.key, e.target.value)}/>
+              <input type={field.type} value={formData[field.key].toString()} onChange={e => onChange(field.key, e.target.value)} placeholder={field.label}/>
             }
           </label>
           {errors[field.key]?.length > 0 && <div>{errors[field.key].join(',')}</div>}

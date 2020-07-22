@@ -5,6 +5,7 @@ import {withSession} from '../lib/session';
 import {User} from '../src/entity/User';
 import {useForm} from '../hooks/useForm';
 import qs from 'query-string';
+import Layout from '../components/Layout';
 
 const SignIn: NextPage<{user: User}> = (props) => {
   const {form} = useForm({
@@ -19,15 +20,15 @@ const SignIn: NextPage<{user: User}> = (props) => {
       success: () => {
         alert('登录成功');
         location.href = '/posts';
-        const query = qs.parse(location.search);
-        location.href = query.returnTo.toString();
+        // const query = qs.parse(location.search);
+        // location.href = query.returnTo.toString();
       }
     }
   });
   return (
-    <div>
+    <Layout>
       {form}
-    </div>
+    </Layout>
   )
 };
 

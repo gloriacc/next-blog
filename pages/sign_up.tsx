@@ -2,6 +2,7 @@ import {NextPage} from 'next';
 import React from 'react';
 import axios from 'axios';
 import {useForm} from '../hooks/useForm';
+import Layout from '../components/Layout';
 
 const SignUp: NextPage = () => {
   const {form} = useForm({
@@ -21,9 +22,9 @@ const SignUp: NextPage = () => {
     }
   });
   return (
-    <div>
+    <Layout>
       {form}
-    </div>
+    </Layout>
   )
 };
 

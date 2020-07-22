@@ -3,6 +3,7 @@ import React from 'react';
 import axios from 'axios';
 import {useForm} from '../../hooks/useForm';
 import {withSession} from '../../lib/session';
+import Layout from '../../components/Layout';
 
 const PostsNew: NextPage = () => {
   const {form,} = useForm({
@@ -21,9 +22,9 @@ const PostsNew: NextPage = () => {
     }
   });
   return (
-    <div>
+    <Layout>
       {form}
-    </div>
+    </Layout>
   )
 };
 
