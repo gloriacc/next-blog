@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import 'styles/global.scss';
 import React from 'react';
-import 'highlight.js/styles/darcula.css';
+import 'highlight.js/styles/rainbow.css';
 import App from 'next/app';
 import favicon from '../public/favicon.ico';
 

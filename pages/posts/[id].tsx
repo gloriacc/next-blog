@@ -7,6 +7,9 @@ import {User} from '../../src/entity/User';
 import marked from 'marked';
 import hljs from 'highlight.js';
 import styled from 'styled-components';
+import Layout from '../../components/Layout';
+import dayjs from 'dayjs';
+import Link from 'next/link';
 
 type Props = {
   post: Post,
@@ -14,22 +17,46 @@ type Props = {
 };
 
 const Wrapper = styled.main`
-  width: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 24px 48px;
-  margin: 0 auto;
-  pre {
-   code {
-     display: block;
-     overflow-x: auto;
-     padding: 0.5em;
-     background: #2b2b2b;
-     color: #bababa;
-   }
-
+  max-width: 90%;
+  > h1 {
+    color: #FFFFD2;
+  }
+  > div {
+    width: 100%;
+    color: #FCBAD3;
+    display: flex;
+    justify-content: space-between;
+    > a {
+      color: #FCBAD3;
+    }
+  }
+  
+  > article {
+    width: 100%;
+    h1, h2, h3 {
+      color: #FFFFD2;
+    }
+    p, ul, ol {
+      color: #666666;
+      line-height: 20px;
+      a {
+        color: #FCBAD3;
+      }
+    }
+    pre {
+     code {
+       display: block;
+       overflow-x: auto;
+       padding: 1em;
+       background: #474949;
+       color: #d1d9e1;
+       border-radius: 10px;
+     }
+    }
   }
 `;
 
@@ -45,12 +72,15 @@ const postsShow: NextPage<Props> = (props) => {
   const {post} = props;
 
   return (
-    <Wrapper>
-      <h1>{post.title}</h1>
-      <article dangerouslySetInnerHTML={{__html: marked(post.content)}}>
+    <Layout>
+      <Wrapper>
+        <h1>{post.title}</h1>
+        <div><Link href={'/posts'}><a>上一篇</a></Link>{dayjs(post.updatedAt).format('YYYY.MM.DD')}<Link href={'/posts'}><a>下一篇</a></Link></div>
+        <article dangerouslySetInnerHTML={{__html: marked(post.content)}}>
 
-      </article>
-    </Wrapper>
+        </article>
+      </Wrapper>
+    </Layout>
   )
 };
 export default postsShow;

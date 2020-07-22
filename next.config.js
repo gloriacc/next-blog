@@ -10,7 +10,7 @@ module.exports = {
           options: {
             name: '[name].[contenthash].[ext]',
             outputPath: 'static',
-            publicPath: '_next/static'
+            publicPath: '/_next/static'
           }
         }
       ]

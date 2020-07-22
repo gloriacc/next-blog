@@ -126,7 +126,7 @@ const PostsIndex: NextPage<Props> = (props) => {
         {posts.map(post => {
           return <div key={post.id}>
             <Link href={`/posts/${post.id}`}><a>{post.title}</a></Link>
-            <span>{dayjs(post.createdAt).format('YYYY.MM.DD')}</span>
+            <span>{dayjs(post.updatedAt).format('YYYY.MM.DD')}</span>
             {user.username === 'admin' && <div><Link href={`/posts/new/${post.id}`}><a><Icon name="edit"/></a></Link><a onClick={()=>onDelete(post.id)}><Icon className="delete" name="delete"/></a><a onClick={()=>onVisibleToggle(post.id)}><Icon name={post.isPrivate ? 'hide' : 'show'}/></a></div>}
           </div>})
         }
