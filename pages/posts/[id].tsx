@@ -11,6 +11,8 @@ import Layout from '../../components/Layout';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import {getManager} from 'typeorm';
+import Icon from '../../components/Icon';
+import '../../assets/icons/home.svg';
 
 type Props = {
   post: Post,
@@ -35,11 +37,19 @@ const Wrapper = styled.main`
     display: flex;
     justify-content: space-between;
     text-align: center;
-    > a {
+    a {
       color: #FCBAD3;
     }
     > span {
       margin: 0 auto;
+      > a {
+        margin-right: 10px;
+        > .home {
+          fill: #FCBAD3;
+          width: 16px;
+          height: 16px;
+        }
+      }     
     }
   }
   
@@ -85,7 +95,7 @@ const postsShow: NextPage<Props> = (props) => {
         <h1>{post.title}</h1>
         <div>
           {!post.isPrivate && <Link href={prePost ? `/posts/${prePost.id}` : '/posts'}><a>上一篇</a></Link>}
-          <span>{dayjs(post.updatedAt).format('YYYY.MM.DD')}</span>
+          <span><Link href={'/posts'}><a><Icon className="home" name="home"/></a></Link>{dayjs(post.updatedAt).format('YYYY.MM.DD')}</span>
           {!post.isPrivate && <Link href={nextPost ? `/posts/${nextPost.id}` : '/posts'}><a>下一篇</a></Link>}
         </div>
         <article dangerouslySetInnerHTML={{__html: marked(post.content)}}>
