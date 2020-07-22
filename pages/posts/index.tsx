@@ -63,7 +63,6 @@ const Wrapper = styled.main`
       text-overflow: ellipsis;
       white-space: nowrap;
       display: inline-block;
-      max-width: 70%;
     }
     > span {
       color: #FFFFD2;
@@ -129,7 +128,7 @@ const PostsIndex: NextPage<Props> = (props) => {
           return <div key={post.id}>
             <Link href={`/posts/${post.id}`}><a>{post.title}</a></Link>
             <span>{dayjs(post.updatedAt).format('YYYY.MM.DD')}</span>
-            {user.username === 'admin' && <div><Link href={`/posts/new/${post.id}`}><a><Icon name="edit"/></a></Link><a onClick={()=>onDelete(post.id)}><Icon className="delete" name="delete"/></a><a onClick={()=>onVisibleToggle(post.id)}><Icon name={post.isPrivate ? 'hide' : 'show'}/></a></div>}
+            {user.username === 'admin' && <div><Link href={{ pathname: '/posts/new', query: { id: post.id }}}><a><Icon name="edit"/></a></Link><a onClick={()=>onDelete(post.id)}><Icon className="delete" name="delete"/></a><a onClick={()=>onVisibleToggle(post.id)}><Icon name={post.isPrivate ? 'hide' : 'show'}/></a></div>}
           </div>})
         }
       </Wrapper>
