@@ -1,40 +1,26 @@
 import React from 'react';
-import Link from 'next/link';
 import styled from 'styled-components';
+// @ts-ignore
+import logo from '../assets/images/logo.png';
+import Link from 'next/link';
 
-const Nav = styled.nav`
-  width: 100%;
-  height: 50px;
-  border-bottom: 1px solid gray;
+const Wrapper = styled.div`
+  height: 100vh;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
   align-items: center;
   > a {
-    color: black;
-    margin: 0 10px;
-    :hover {
-      color: gray;
+    margin: 24px 0;
+    > img {
+      width: 200px;
     }
   }
 `;
-const Wrapper = styled.div`
-  height: 100vh;
-`;
 
-type Props = {
-  pageProps: any
-}
-
-const Layout:React.FC<Props> = (props) => {
+const Layout = (props: any) => {
   return (
     <Wrapper>
-      {/*<Nav>*/}
-      {/*  <Link href={'/'}><a>Home</a></Link>*/}
-      {/*  <Link href={'/posts'}><a>Blogs</a></Link>*/}
-      {/*  <a href='https://github.com/gloriacc' target='_blank'>Github</a>*/}
-      {/*  {props.pageProps.user ? <><a>{props.pageProps.user.username}</a><Link href={'/sign_out'}><a>Sign Out</a></Link></>*/}
-      {/*    :<><Link href={'/sign_in'}><a>Sign In</a></Link><Link href={'/sign_up'}><a>Sign Up</a></Link></>}*/}
-      {/*</Nav>*/}
+      <Link href={'/'}><a><img src={logo} alt="logo"/></a></Link>
       {props.children}
     </Wrapper>
   )

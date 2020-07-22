@@ -17,6 +17,10 @@ type Props = {
   user: User
 }
 
+const Wrapper = styled.div`
+  height: 100vh;
+`;
+
 const HomeTitle = styled.section`
   display: flex;
   flex-direction: column;
@@ -64,7 +68,7 @@ const Home: NextPage<Props> = (props) => {
     location.href = user ? '/sign_out' : 'sign_in';
   }
   return (
-    <>
+    <Wrapper>
       <HomeTitle className='big'>
         <img src={logo} alt="logo"/>
         <p>Gloria 的个人博客</p>
@@ -73,7 +77,7 @@ const Home: NextPage<Props> = (props) => {
       <Sign>
         <Icon className={classNames('sign', user?'sign-signOut':'sign-signIn')} name="sign" onClick={onClick}/>
       </Sign>
-    </>
+    </Wrapper>
   )
 }
 

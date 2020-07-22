@@ -7,9 +7,6 @@ import {withSession} from '../../lib/session';
 import {User} from '../../src/entity/User';
 import styled from 'styled-components';
 import axios from 'axios';
-// @ts-ignore
-import logo from '../../assets/images/logo.png';
-// @ts-ignore
 import dayjs from 'dayjs';
 import Icon from '../../components/Icon';
 import '../../assets/icons/add.svg';
@@ -17,6 +14,7 @@ import '../../assets/icons/edit.svg';
 import '../../assets/icons/delete.svg';
 import '../../assets/icons/hide.svg';
 import '../../assets/icons/show.svg';
+import Layout from '../../components/Layout';
 
 type Props = {
   posts: Post[],
@@ -24,84 +22,80 @@ type Props = {
 }
 
 const Wrapper = styled.main`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 24px 48px;
-  > img {
-    width: 200px;
-  }
-  > .add {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 20px;
-    height: 20px;
-    fill: #FFFFD2;
-  }
-  > section {
-    max-width: 100%;
-    margin: 12px 0;
-    > div {
-      padding: 12px 24px;
+  max-width: 90%;
+  > div {
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #FCBAD3;
+    a {
+      color: #FFFFD2;
+      text-decoration: none;
+      cursor: pointer;
+      :hover {
+        color: #FCBAD3;
+      }
+    }
+    > a, > div {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #FCBAD3;
-      a {
-        color: #FFFFD2;
-        text-decoration: none;
-        cursor: pointer;
-        :hover {
-          color: #FCBAD3;
-        }
-      }
-      > a, > div {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        > a {
-          margin-left: 20px;
-          :first-child {
-            margin-left: 0;
-          }
-        }
-        .icon {
-          width: 20px;
-          height: 20px;
-          fill: #FFFFD2;
-          vertical-align: bottom;
-          :hover {
-            fill: #FCBAD3;
-          }
-        }
-      }
       > a {
-        flex-grow: 1;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        display: inline-block;
-        max-width: 70%;
-      }
-      > span {
-        color: #FFFFD2;
         margin-left: 20px;
-        margin-right: 20px;
+        
       }
+      .icon {
+        width: 20px;
+        height: 20px;
+        fill: #FFFFD2;
+        vertical-align: bottom;
+        :hover {
+          fill: #FCBAD3;
+        }
+      }
+    }
+    > a {
+      flex-grow: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: inline-block;
+      max-width: 70%;
+    }
+    > span {
+      color: #FFFFD2;
+      margin-left: 20px;
     }
   }
   @media screen and (max-width:650px){
-    > section {
+    > div {
+      flex-direction: column;
+      line-height: 28px;
+      > a {
+        white-space: normal;
+        text-align: center;
+      }
+      > span {
+        margin-left: 0;
+      }
       > div {
-        flex-direction: column;
-        line-height: 28px;
-        > a {
-          white-space: normal;
-          text-align: center;
+        > a:first-child {
+          margin-left: 0;
         }
       }
     }
+  }
+`;
+
+const AddButton = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  > .add {
+    width: 20px;
+    height: 20px;
+    fill: #FFFFD2;
   }
 `;
 
@@ -127,9 +121,8 @@ const PostsIndex: NextPage<Props> = (props) => {
     })
   },[]);
   return (
-    <Wrapper>
-      <img src={logo} alt="logo"/>
-      <section>
+    <Layout>
+      <Wrapper>
         {posts.map(post => {
           return <div key={post.id}>
             <Link href={`/posts/${post.id}`}><a>{post.title}</a></Link>
@@ -137,9 +130,9 @@ const PostsIndex: NextPage<Props> = (props) => {
             {user.username === 'admin' && <div><Link href={`/posts/new/${post.id}`}><a><Icon name="edit"/></a></Link><a onClick={()=>onDelete(post.id)}><Icon className="delete" name="delete"/></a><a onClick={()=>onVisibleToggle(post.id)}><Icon name={post.isPrivate ? 'hide' : 'show'}/></a></div>}
           </div>})
         }
-      </section>
-      {user.username === 'admin' && <Icon className="add" name="add" onClick={onAdd}/>}
-    </Wrapper>
+      </Wrapper>
+      {user.username === 'admin' && <AddButton><Icon className="add" name="add" onClick={onAdd}/></AddButton>}
+    </Layout>
   )
 }
 
