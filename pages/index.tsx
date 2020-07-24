@@ -1,6 +1,5 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import {GetServerSideProps, GetServerSidePropsContext, NextPage} from 'next';
-import {getDatabaseConnection} from '../lib/getDatabaseConnection';
 import {Post} from '../src/entity/Post';
 import Link from 'next/link';
 import {withSession} from '../lib/session';
@@ -71,7 +70,7 @@ const Home: NextPage<Props> = (props) => {
     <Wrapper>
       <HomeTitle className='big'>
         <img src={logo} alt="logo"/>
-        <p>Gloria 的个人博客呀</p>
+        <p>Gloria 的个人博客</p>
         <Link href={'/posts'}><a>{`文章列表->`}</a></Link>
       </HomeTitle>
       <Sign>
