@@ -22,7 +22,7 @@
     "lodash": "^4.17.19",
     "marked": "^1.1.1",
     "md5": "^2.2.1",
-    "next": "9.4.4",
+    "next": "11.1.0",
     "next-iron-session": "^4.1.7",
     "pg": "^8.3.0",
     "pygmentize-bundled": "^2.3.0",
